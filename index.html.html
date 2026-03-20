@@ -1,0 +1,622 @@
+Test personalidad · HTML
+Copiar
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test de Personalidad</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-dark: #0a1628;
+    --blue-deep: #0d2347;
+    --blue-mid: #1a3a6e;
+    --blue-main: #1e56c4;
+    --blue-bright: #3b82f6;
+    --blue-light: #60a5fa;
+    --blue-pale: #bfdbfe;
+    --blue-glow: #93c5fd;
+    --accent: #f0c040;
+    --accent2: #34d399;
+    --white: #ffffff;
+    --text-light: #e0eaff;
+    --text-muted: #93b4d4;
+  }
+ 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--blue-dark);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+  }
+ 
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(30, 86, 196, 0.35) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(13, 35, 71, 0.8) 0%, transparent 70%);
+    z-index: 0;
+    animation: bgPulse 8s ease-in-out infinite alternate;
+  }
+ 
+  @keyframes bgPulse {
+    from { opacity: 0.8; }
+    to { opacity: 1; }
+  }
+ 
+  /* Floating circles */
+  .bubble {
+    position: fixed;
+    border-radius: 50%;
+    opacity: 0.06;
+    background: var(--blue-light);
+    animation: float linear infinite;
+    z-index: 0;
+  }
+  .bubble:nth-child(1) { width: 200px; height: 200px; left: 5%; top: 10%; animation-duration: 18s; }
+  .bubble:nth-child(2) { width: 120px; height: 120px; right: 10%; top: 20%; animation-duration: 14s; animation-delay: -5s; }
+  .bubble:nth-child(3) { width: 80px; height: 80px; left: 30%; bottom: 15%; animation-duration: 20s; animation-delay: -8s; }
+  .bubble:nth-child(4) { width: 160px; height: 160px; right: 5%; bottom: 30%; animation-duration: 16s; animation-delay: -3s; }
+ 
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+ 
+  /* Stars */
+  .stars {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .star {
+    position: absolute;
+    width: 3px; height: 3px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.7; }
+  }
+ 
+  /* Main card */
+  .card {
+    position: relative;
+    z-index: 10;
+    background: rgba(13, 35, 71, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 28px;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 520px;
+    margin: 2rem 1rem;
+    box-shadow:
+      0 0 60px rgba(30, 86, 196, 0.2),
+      0 30px 80px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+    animation: cardIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+ 
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+ 
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+ 
+  .header .emoji-icon {
+    font-size: 2.8rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    animation: bounce 2s ease-in-out infinite;
+  }
+ 
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+ 
+  .header h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    color: var(--white);
+    letter-spacing: 1px;
+    text-shadow: 0 0 30px rgba(96, 165, 250, 0.6);
+  }
+ 
+  .header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 0.4rem;
+    font-weight: 600;
+  }
+ 
+  /* Progress */
+  .progress-section {
+    margin-bottom: 1.8rem;
+  }
+ 
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+ 
+  .progress-label span {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--blue-light);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+ 
+  .progress-track {
+    height: 8px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+ 
+  .progress-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--blue-main), var(--blue-light), var(--accent));
+    background-size: 200% 100%;
+    transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: shimmer 2s linear infinite;
+    box-shadow: 0 0 12px rgba(96, 165, 250, 0.5);
+  }
+ 
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+ 
+  /* Question */
+  .question-area {
+    animation: questionSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+ 
+  @keyframes questionSlide {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+ 
+  .question-num {
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--blue-glow);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+ 
+  .question-num::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background: var(--blue-glow);
+    border-radius: 99px;
+  }
+ 
+  .question-text {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+ 
+  /* Options */
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1.8rem;
+  }
+ 
+  .option-btn {
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(96, 165, 250, 0.15);
+    border-radius: 16px;
+    padding: 14px 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-light);
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .option-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+ 
+  .option-btn:hover {
+    border-color: rgba(96, 165, 250, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(30, 86, 196, 0.3);
+  }
+ 
+  .option-btn:hover::before { opacity: 1; }
+ 
+  .option-btn.selected {
+    background: rgba(30, 86, 196, 0.35);
+    border-color: var(--blue-bright);
+    color: var(--white);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2), 0 8px 24px rgba(30, 86, 196, 0.4);
+    transform: translateY(-2px) scale(1.02);
+  }
+ 
+  .option-btn.selected::before { opacity: 1; }
+ 
+  .opt-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: var(--blue-pale);
+    flex-shrink: 0;
+    transition: all 0.25s;
+  }
+ 
+  .option-btn.selected .opt-letter {
+    background: var(--blue-bright);
+    color: white;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  }
+ 
+  /* Navigation */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+ 
+  .btn {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    border: none;
+    border-radius: 14px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.3px;
+  }
+ 
+  .btn-ghost {
+    background: rgba(255,255,255,0.06);
+    color: var(--text-muted);
+    border: 1.5px solid rgba(255,255,255,0.08);
+  }
+ 
+  .btn-ghost:hover:not(:disabled) {
+    background: rgba(255,255,255,0.1);
+    color: var(--white);
+  }
+ 
+  .btn-ghost:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+ 
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue-main), var(--blue-bright));
+    color: white;
+    box-shadow: 0 6px 20px rgba(30, 86, 196, 0.5);
+    flex: 1;
+  }
+ 
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(30, 86, 196, 0.6);
+  }
+ 
+  .btn-primary:active {
+    transform: translateY(0) scale(0.98);
+  }
+ 
+  /* Results */
+  #results {
+    display: none;
+    animation: cardIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+ 
+  .results-header {
+    text-align: center;
+    margin-bottom: 1.8rem;
+  }
+ 
+  .results-header .trophy {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    animation: bounce 1.5s ease-in-out infinite;
+  }
+ 
+  .results-header h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.8rem;
+    color: var(--white);
+    text-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
+  }
+ 
+  .results-header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 0.4rem;
+    font-weight: 600;
+  }
+ 
+  .results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+ 
+  .result-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(96, 165, 250, 0.12);
+    border-radius: 16px;
+    padding: 14px 14px;
+    transition: all 0.3s;
+    animation: resultPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+ 
+  @keyframes resultPop {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+  }
+ 
+  .result-item:hover {
+    border-color: rgba(96, 165, 250, 0.3);
+    background: rgba(30, 86, 196, 0.15);
+  }
+ 
+  .result-q {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--blue-glow);
+    margin-bottom: 4px;
+  }
+ 
+  .result-a {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--white);
+  }
+ 
+  .btn-restart {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.05rem;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #0d3b8e, var(--blue-main), var(--blue-bright));
+    color: white;
+    border: none;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 6px 24px rgba(30, 86, 196, 0.4);
+    letter-spacing: 0.3px;
+  }
+ 
+  .btn-restart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(30, 86, 196, 0.6);
+  }
+ 
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.3), transparent);
+    margin: 1.5rem 0;
+  }
+</style>
+</head>
+<body>
+ 
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+ 
+<div class="stars" id="stars"></div>
+ 
+<div class="card">
+  <!-- QUIZ -->
+  <div id="quiz">
+    <div class="header">
+      <span class="emoji-icon">✨</span>
+      <h1>Personalidad</h1>
+      <p>Elige una opción en cada pregunta</p>
+    </div>
+ 
+    <div class="divider"></div>
+ 
+    <div class="progress-section">
+      <div class="progress-label">
+        <span>Progreso</span>
+        <span id="prog-label">1 de 10</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width: 10%;"></div>
+      </div>
+    </div>
+ 
+    <div class="question-area" id="question-area">
+      <div class="question-num" id="q-num">Pregunta 1</div>
+      <div class="question-text" id="q-text"></div>
+      <div class="options" id="options"></div>
+    </div>
+ 
+    <div class="nav">
+      <button class="btn btn-ghost" id="prev-btn" onclick="prevQ()" disabled>← Atrás</button>
+      <button class="btn btn-primary" id="next-btn" onclick="nextQ()">Siguiente →</button>
+    </div>
+  </div>
+ 
+  <!-- RESULTS -->
+  <div id="results">
+    <div class="results-header">
+      <span class="trophy">🏆</span>
+      <h2>¡Aquí estás tú!</h2>
+      <p>Tu perfil de personalidad completo</p>
+    </div>
+    <div class="divider"></div>
+    <div class="results-grid" id="results-grid"></div>
+    <button class="btn-restart" onclick="restart()">🔄 Volver a hacer el test</button>
+  </div>
+</div>
+ 
+<script>
+  // Generate stars
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*4}s;animation-duration:${2+Math.random()*3}s;opacity:${Math.random()*0.4}`;
+    starsEl.appendChild(s);
+  }
+ 
+  const questions = [
+    { q: "¿Qué color prefieres?", opts: ["Negro","Rojo","Azul","Verde"], emojis: ["🖤","❤️","💙","💚"] },
+    { q: "¿Cuál es tu película favorita?", opts: ["Blanca Nieves","Zootopia","Enredados","Buscando a Nemo"], emojis: ["🍎","🦊","👸","🐠"] },
+    { q: "¿Cuál es tu comida rápida fav?", opts: ["Pizza","Hamburguesa","Hotdog","Nuggets"], emojis: ["🍕","🍔","🌭","🍗"] },
+    { q: "¿Cuál es tu cantante fav?", opts: ["Bad Bunny","Iván Cornejo","Yan Block","Alvarito Díaz"], emojis: ["🐰","🎸","🎤","🎵"] },
+    { q: "¿Cuál es tu helado fav?", opts: ["Chocolate","Fresa","Vainilla","Napolitano"], emojis: ["🍫","🍓","🌟","🌈"] },
+    { q: "¿Cuál es tu postre fav?", opts: ["Pastel","Helado","Crepas","Donas"], emojis: ["🎂","🍦","🥞","🍩"] },
+    { q: "¿Cuál es tu canción fav?", opts: ["¿Qué Somos?","Mónaco","444","Otro atardecer"], emojis: ["🎶","🎸","4️⃣","🌅"] },
+    { q: "¿Cuál es tu materia fav?", opts: ["Matemáticas","Ciencias","Biología","Historia"], emojis: ["➕","🔬","🧬","📜"] },
+    { q: "¿Qué superhéroe prefieres?", opts: ["Batman","Superman","Spiderman","Flash"], emojis: ["🦇","🦸","🕷️","⚡"] },
+    { q: "¿Qué deporte prefieres?", opts: ["Voleibol","Basquetbol","Americano","Tennis"], emojis: ["🏐","🏀","🏈","🎾"] },
+  ];
+ 
+  const letters = ['A','B','C','D'];
+  let current = 0;
+  let answers = new Array(10).fill(null);
+ 
+  function render() {
+    const q = questions[current];
+    document.getElementById('q-num').textContent = `Pregunta ${current+1}`;
+    document.getElementById('prog-label').textContent = `${current+1} de 10`;
+    document.getElementById('q-text').textContent = q.q;
+    document.getElementById('progress-fill').style.width = `${((current+1)/10)*100}%`;
+ 
+    const optDiv = document.getElementById('options');
+    optDiv.innerHTML = '';
+    q.opts.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn' + (answers[current] === i ? ' selected' : '');
+      btn.innerHTML = `<span class="opt-letter">${letters[i]}</span><span>${q.emojis[i]} ${opt}</span>`;
+      btn.onclick = () => { answers[current] = i; render(); };
+      optDiv.appendChild(btn);
+    });
+ 
+    document.getElementById('prev-btn').disabled = current === 0;
+    document.getElementById('next-btn').textContent = current === 9 ? '¡Ver mi perfil! 🎉' : 'Siguiente →';
+ 
+    // Re-trigger animation
+    const qa = document.getElementById('question-area');
+    qa.style.animation = 'none';
+    qa.offsetHeight;
+    qa.style.animation = 'questionSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+  }
+ 
+  function nextQ() {
+    if (answers[current] === null) {
+      // Shake the options
+      const opts = document.getElementById('options');
+      opts.style.animation = 'shake 0.4s ease';
+      setTimeout(() => opts.style.animation = '', 400);
+      return;
+    }
+    if (current === 9) { showResults(); return; }
+    current++;
+    render();
+  }
+ 
+  function prevQ() {
+    if (current > 0) { current--; render(); }
+  }
+ 
+  function showResults() {
+    document.getElementById('quiz').style.display = 'none';
+    const rs = document.getElementById('results');
+    rs.style.display = 'block';
+ 
+    const grid = document.getElementById('results-grid');
+    grid.innerHTML = '';
+    questions.forEach((q, i) => {
+      const item = document.createElement('div');
+      item.className = 'result-item';
+      item.style.animationDelay = `${i * 0.06}s`;
+      const shortQ = q.q.replace('¿Cuál es tu ','').replace('¿Qué ','').replace('?','').trim();
+      item.innerHTML = `<div class="result-q">${shortQ}</div><div class="result-a">${q.emojis[answers[i]]} ${q.opts[answers[i]]}</div>`;
+      grid.appendChild(item);
+    });
+  }
+ 
+  function restart() {
+    current = 0;
+    answers = new Array(10).fill(null);
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('quiz').style.display = 'block';
+    render();
+  }
+ 
+  // Shake animation
+  const shakeStyle = document.createElement('style');
+  shakeStyle.textContent = '@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }';
+  document.head.appendChild(shakeStyle);
+ 
+  render();
+</script>
+</body>
+</html>
